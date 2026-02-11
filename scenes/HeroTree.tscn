@@ -1,0 +1,66 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Trunk.png" type="Texture" id=1]
+[ext_resource path="res://Branch.png" type="Texture" id=2]
+[ext_resource path="res://WinZone.png" type="Texture" id=3]
+
+[Node]
+name="HeroTree"
+extends StaticBody2D
+
+# Trunk Node
+[Node]
+name="Trunk"
+extends Sprite2D
+texture = ExtResource( 1 )
+
+# Collision Shape for Trunk
+[Node]
+name="TrunkCollision"
+extends CollisionShape2D
+shape = RectangleShape2D.new() # Set the size accordingly
+
+# Branches Node
+[Node]
+name="Branches"
+extends Node2D
+
+# Example of Branch Sprites
+[Node]
+name="Branch1"
+extends Sprite2D
+texture = ExtResource( 2 )
+
+# Collision Shape for Branch1
+[Node]
+name="Branch1Collision"
+extends CollisionShape2D
+shape = RectangleShape2D.new() # Set the size accordingly
+
+# Platforms Node
+[Node]
+name="Platforms"
+extends Node2D
+
+# Example of one-way physics platforms
+[Node]
+name="Platform1"
+extends StaticBody2D
+
+# Collision shape for Platform1
+[Node]
+name="Platform1Collision"
+extends CollisionShape2D
+shape = RectangleShape2D.new() # Set the size according to your platform size
+
+# Area2D WinZone
+[Node]
+name="WinZone"
+extends Area2D
+
+# Collision Shape for WinZone
+[Node]
+name="WinZoneCollision"
+extends CollisionShape2D
+shape = RectangleShape2D.new() # Adjust the size for WinZone
+
