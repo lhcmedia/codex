@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=2]
+
+[node]
+extends Node2D
+
+[children]
+
+# Add a Camera2D node that follows the Y axis
+[Camera2D]
+current = true
+offset = Vector2(0, 0)
+rotation = 0
+
+# Add a Sprite2D for the background
+[Sprite2D]
+texture = ExtResource("res://path/to/background_texture.png")
+
+# Add an instance of HeroTree
+[HeroTree]
+
+# Add an instance of Player
+[Player]
