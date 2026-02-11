@@ -1,55 +1,33 @@
 extends Node
 
-# Defines the properties for Flight mode
-var gravity = Vector2(0, 9.8)
-var flapping_force = -300
-var obstacles = []
-var speed = 200
-var timer = 0
-var spawn_interval = 2
+# Flight Mode Scene Logic
 
-# Parallax backgrounds
-var background
-var midground
+var is_flying = false
+var flight_speed = 10.0
 
 func _ready():
-    # Initialize backgrounds
-    background = $Background
-    midground = $Midground
-    # Start the obstacle spawner
-    set_process(true)
+    pass  # Called when the node enters the scene tree for the first time.
 
 func _process(delta):
-    # Apply gravity
-    if is_on_ground():
-        velocity.y += gravity.y * delta
-    # Move the backgrounds
-    update_parallax()
-    # Update obstacle timer
-    timer += delta
-    if timer > spawn_interval:
-        spawn_obstacle()
-        timer = 0
+    if is_flying:
+        move_flight(delta)
 
-func is_on_ground():
-    # Implement ground check logic here
-    return position.y > get_viewport().size.y
+func start_flying():
+    is_flying = true
 
-func flap():
-    if is_on_ground():
-        velocity.y = flapping_force
+func stop_flying():
+    is_flying = false
 
-func spawn_obstacle():
-    var obstacle = Obstacle.new()
-    obstacle.position.x = get_viewport().size.x
-    obstacles.append(obstacle)
-    add_child(obstacle)
-
-func update_parallax():
-    # Update backgrounds for a parallax effect
-    background.position.x -= speed * 0.5
-    midground.position.x -= speed * 0.75
-    if background.position.x < -background.texture.get_size().x:
-        background.position.x = 0
-    if midground.position.x < -midground.texture.get_size().x:
-        midground.position.x = 0
+func move_flight(delta):
+    # Basic flight logic, you can modify the controls
+    var direction = Vector3()
+    if Input.is_action_pressed("ui_up"):
+        direction.z -= 1
+    if Input.is_action_pressed("ui_down"):
+        direction.z += 1
+    if Input.is_action_pressed("ui_left"):
+        direction.x -= 1
+    if Input.is_action_pressed("ui_right"):
+        direction.x += 1
+    direction = direction.normalized() * flight_speed * delta
+    translate(direction)
