@@ -1,25 +1,20 @@
 extends Node
 
-var score = 0
-var game_mode = "normal"
+# This is the GameManager autoload script
 
-signal mode_changed(new_mode)
+# Add game management functions and variables here.
+
+var score: int = 0
+var level: int = 1
 
 func _ready():
-    # Initialize singleton state
-    score = 0
-    game_mode = "normal"
+    # Initialize game
+    print("Game Manager Ready")
 
-func set_score(new_score):
-    score = new_score
+func add_score(points: int):
+    score += points
+    print("Score updated: %d", score)
 
-func get_score():
-    return score
-
-func set_game_mode(new_mode):
-    if game_mode != new_mode:
-        game_mode = new_mode
-        emit_signal("mode_changed", new_mode)
-
-func get_game_mode():
-    return game_mode
+func next_level():
+    level += 1
+    print("Advanced to level: %d", level)
