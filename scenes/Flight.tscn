@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=4]
+
+[ext_resource path="res://Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://ObstacleSpawner.tscn" type="PackedScene" id=2]
+
+[node name="Node2D" type="Node2D"]
+
+	[node name="Camera2D" type="Camera2D"]
+		current=true
+
+	[node name="ParallaxBackground" type="ParallaxBackground"]
+		[node name="ParallaxLayer" type="ParallaxLayer" id=3]
+			offset_ratio=Vector2(0.1, 0.1)
+			[canvas_item] # Layer 1
+
+		[node name="ParallaxLayer" type="ParallaxLayer" id=4]
+			offset_ratio=Vector2(0.2, 0.2)
+			[canvas_item] # Layer 2
+
+		[node name="ParallaxLayer" type="ParallaxLayer" id=5]
+			offset_ratio=Vector2(0.3, 0.3)
+			[canvas_item] # Layer 3
+
+		[node name="ParallaxLayer" type="ParallaxLayer" id=6]
+			offset_ratio=Vector2(0.4, 0.4)
+			[canvas_item] # Layer 4
+
+	[node name="Player" type="PackedScene"]
+	
+	[node name="ObstacleSpawner" type="PackedScene"]
