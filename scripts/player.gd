@@ -1,55 +1,31 @@
-extends CharacterBody2D
+extends KinematicBody2D
 
-const STATE_FLIGHT = "FLIGHT"
-const STATE_CLIMB = "CLIMB"
+# Player character controller for a 2D game
 
-var state = STATE_FLIGHT
+# Define player speed
+var speed = 200
 
-var gravity = 1000.0
-var flap_strength = -600.0
-var velocity = Vector2.ZERO
+# Declare variables for movement
+var velocity = Vector2()
 
-# Animation Variables
-var animation_player: AnimationPlayer
-var is_flapping = false
-
-func _ready():
-    animation_player = $AnimationPlayer
-
-func _physics_process(delta):
-    match state:
-        STATE_FLIGHT:
-            handle_flight(delta)
-        STATE_CLIMB:
-            handle_climb(delta)
-
-    velocity.y += gravity * delta
+func _process(delta):
+    # Update player movement input
+    handle_input()
+    # Move the player
     move_and_slide(velocity)
 
-func handle_flight(delta):
-    if Input.is_action_just_pressed("flap") and !is_flapping:
-        velocity.y = flap_strength
-        is_flapping = true
-        animation_player.play("flap")
-    elif is_flapping:
-        is_flapping = false
-        animation_player.stop()  # Stop flapping animation, or switch to a gliding animation if needed
-
-func handle_climb(delta):
-    if Input.is_action_pressed("up"):
-        velocity.y = -200  # Climbing speed
-        animation_player.play("climb")
-    else:
-        state = STATE_FLIGHT  # Switch back to flight state if not climbing
-
-func _on_AnimationPlayer_animation_finished(anim_name):
-    if anim_name == "climb":
-        state = STATE_FLIGHT
-
-func _on_area_entered(area):
-    if area.name == "ClimbingArea":
-        state = STATE_CLIMB
-    
-func _on_area_exited(area):
-    if area.name == "ClimbingArea":
-        state = STATE_FLIGHT
+func handle_input():
+    velocity = Vector2()
+    # Check for input in the horizontal direction
+    if Input.is_action_pressed('ui_right'):  # Right
+        velocity.x += 1
+    if Input.is_action_pressed('ui_left'):   # Left
+        velocity.x -= 1
+    # Check for input in the vertical direction
+    if Input.is_action_pressed('ui_down'):   # Down
+        velocity.y += 1
+    if Input.is_action_pressed('ui_up'):     # Up
+        velocity.y -= 1
+    # Normalize the velocity vector
+    if velocity.length() > 0:
+        velocity = velocity.normalized() * speed
