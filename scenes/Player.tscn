@@ -1,0 +1,26 @@
+[gd_scene load_steps=2]
+
+[node name="Player" type="CharacterBody2D"]
+
+# Player properties
+speed = 400
+
+[animation_tree]
+tree_root = "AnimationNodeStateMachine"
+
+[node name="AnimatedSprite" type="AnimatedSprite2D"]
+texture = preload("res://path/to/your/sprite.png")
+
+# Flight animation configuration
+playback_speed = 1.0
+
+animation_flight = "Flight"
+animation_climb = "Climb"
+
+[node name="CollisionShape2D" type="CollisionShape2D"]
+shape = CircleShape2D.new()
+
+# Set the radius for collision shape
+shape.radius = 16.0
+
+# Add signals, methods, etc. as needed
