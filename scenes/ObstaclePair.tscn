@@ -1,0 +1,26 @@
+[gd_scene load_steps=2]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TopPipe" type="StaticBody2D"]
+    position = Vector2(0, -100)
+    [child of="TopPipe"]
+    node name="Sprite2D" type="Sprite2D"
+    texture = ExtResource( "res://path_to_top_pipe_texture.png" )
+
+    [child of="TopPipe"]
+    node name="CollisionShape2D" type="CollisionShape2D"
+    shape = CircleShape2D.new()
+
+[node name="BottomPipe" type="StaticBody2D"]
+    position = Vector2(0, 100)
+    [child of="BottomPipe"]
+    node name="Sprite2D" type="Sprite2D"
+    texture = ExtResource( "res://path_to_bottom_pipe_texture.png" )
+
+    [child of="BottomPipe"]
+    node name="CollisionShape2D" type="CollisionShape2D"
+    shape = CircleShape2D.new()
+
+[node name="ScoreZone" type="Area2D"]
+    position = Vector2(0, 0)
