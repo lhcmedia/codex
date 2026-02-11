@@ -1,0 +1,8 @@
+[my_project]
+name="Codex"
+version="0.1"
+main_scene="res://scenes/Main.tscn"
+cronology_enabled=false
+onboarding_enabled=false
+[engine]
+edition=4.5.1
